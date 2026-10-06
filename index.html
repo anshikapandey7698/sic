@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anshika Pandey | Portfolio</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0b0f17;
+            --card-bg: #131b2e;
+            --card-hover: #18223a;
+            --border-color: #1e293b;
+            --accent-blue: #38bdf8;
+            --accent-indigo: #818cf8;
+            --accent-emerald: #34d399;
+            --accent-amber: #fbbf24;
+            --accent-rose: #f43f5e;
+            --text-main: #cbd5e1;
+            --text-muted: #64748b;
+            --text-heading: #f8fafc;
+            --highlight-glow: rgba(56, 189, 248, 0.35);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Hero Header */
+        header {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(129, 140, 248, 0.08) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 36px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-blue), var(--accent-indigo));
+        }
+
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .profile-info h1 {
+            color: var(--text-heading);
+            font-size: 2.4rem;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            margin-bottom: 6px;
+        }
+
+        .profile-info p {
+            color: var(--accent-blue);
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .location-tag {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badges-top {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .year-badge {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent-blue);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .age-badge {
+            background: rgba(52, 211, 153, 0.15);
+            color: var(--accent-emerald);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        /* Interactive Filter Bar */
+        .filter-bar {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px 24px;
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .filter-label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent-blue);
+            color: var(--text-heading);
+        }
+
+        .filter-btn.active {
+            background: var(--accent-blue);
+            color: #0b0f17;
+            border-color: var(--accent-blue);
+            font-weight: 700;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+        }
+
+        /* Highlighting Dynamic Behavior */
+        .highlightable {
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .is-highlighted {
+            border-color: var(--accent-blue) !important;
+            box-shadow: 0 0 20px var(--highlight-glow) !important;
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, #131b2e 100%) !important;
+        }
+
+        .is-dimmed {
+            opacity: 0.35 !important;
+            filter: grayscale(40%);
+        }
+
+        /* Section Styling */
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 32px;
+            margin-bottom: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .section-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-header h2 {
+            color: var(--text-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .section-header i {
+            font-size: 1.4rem;
+        }
+
+        /* Content Grid with Graphic Banners */
+        .section-content-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 24px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .section-content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Visual Graphic Banners */
+        .visual-banner {
+            width: 100%;
+            height: 220px;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .visual-banner svg {
+            max-width: 100%;
+            height: 100%;
+        }
+
+        /* Sub-grids & Info Cards */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .info-card h3 {
+            font-size: 0.95rem;
+            color: var(--text-heading);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        /* Traits Grid */
+        .traits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 10px;
+        }
+
+        .trait-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .trait-box i {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .trait-box span {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-heading);
+        }
+
+        /* Skill Elements */
+        .skill-group {
+            margin-bottom: 16px;
+        }
+
+        .skill-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: #1e293b;
+            color: var(--text-heading);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tag.active {
+            border-color: var(--accent-indigo);
+            color: var(--accent-indigo);
+        }
+
+        /* Goals Elements */
+        .goal-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .goal-icon {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-blue);
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .goal-content h3 {
+            font-size: 0.98rem;
+            color: var(--text-heading);
+            margin-bottom: 2px;
+        }
+
+        .goal-content p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+            background: rgba(56, 189, 248, 0.05);
+        }
+
+        .contact-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--accent-blue);
+        }
+
+        .contact-info h4 {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .contact-info p {
+            font-size: 0.95rem;
+            color: var(--text-heading);
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Hero Header -->
+        <header class="highlightable" data-tags="who skills goals">
+            <div class="profile-header">
+                <div class="profile-info">
+                    <h1>Anshika Pandey</h1>
+                    <p>B.Tech Computer Science & Engineering • 2nd Year</p>
+                    <div class="location-tag">
+                        <i class="fa-solid fa-building-columns"></i> IET Khandari, Agra Campus
+                    </div>
+                </div>
+                <div class="badges-top">
+                    <span class="year-badge">2nd Year CSE</span>
+                    <span class="age-badge">18 Y/O</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Interactive Highlighting Control Bar -->
+        <div class="filter-bar">
+            <div class="filter-label">
+                <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--accent-amber);"></i> Quick Filter View:
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="applyHighlight('all', this)">Show All</button>
+                <button class="filter-btn" onclick="applyHighlight('who', this)"><i class="fa-solid fa-user"></i> Who I Am</button>
+                <button class="filter-btn" onclick="applyHighlight('skills', this)"><i class="fa-solid fa-code"></i> My Skills</button>
+                <button class="filter-btn" onclick="applyHighlight('goals', this)"><i class="fa-solid fa-bullseye"></i> My Future Goals</button>
+            </div>
+        </div>
+
+        <!-- SECTION 1: WHO I AM -->
+        <div class="section-card highlightable" data-tags="who">
+            <div class="section-header">
+                <i class="fa-solid fa-user" style="color: var(--accent-blue);"></i>
+                <h2>1. Who I Am</h2>
+            </div>
+
+            <div class="section-content-grid">
+                <!-- SVG Graphic Image Card 1 -->
+                <div class="visual-banner" style="background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);">
+                    <svg viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="150" cy="80" r="32" fill="#38bdf8" fill-opacity="0.2" stroke="#38bdf8" stroke-width="2"/>
+                        <circle cx="150" cy="72" r="16" fill="#38bdf8"/>
+                        <path d="M120 125C120 108.431 133.431 95 150 95C166.569 95 180 108.431 180 125V130H120V125Z" fill="#38bdf8"/>
+                        <rect x="90" y="145" width="120" height="28" rx="14" fill="#818cf8" fill-opacity="0.2" stroke="#818cf8"/>
+                        <text x="150" y="163" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">IET Khandari • 18 y/o</text>
+                        <circle cx="70" cy="60" r="14" fill="#f43f5e" fill-opacity="0.2"/>
+                        <path d="M70 55L72 60H77L73 63L75 68L70 65L65 68L67 63L63 60H68L70 55Z" fill="#f43f5e"/>
+                        <circle cx="230" cy="60" r="14" fill="#fbbf24" fill-opacity="0.2"/>
+                        <path d="M226 60L229 57L232 60L230 64H228L226 60Z" fill="#fbbf24"/>
+                    </svg>
+                </div>
+
+                <!-- Profile Details -->
+                <div>
+                    <div class="grid-2" style="margin-bottom: 14px;">
+                        <div class="info-card">
+                            <h3><i class="fa-solid fa-graduation-cap" style="color: var(--accent-blue);"></i> Academic Identity</h3>
+                            <p>An 18-year-old 2nd-year B.Tech CSE student at IET Khandari, simultaneously pursuing the Samsung AI Course.</p>
+                        </div>
+                        <div class="info-card">
+                            <h3><i class="fa-solid fa-brain" style="color: var(--accent-indigo);"></i> Personal Aptitude</h3>
+                            <p>A rapid learner with a creative mind for coming up with new ideas and building practical prototypes.</p>
+                        </div>
+                    </div>
+
+                    <div class="traits-grid">
+                        <div class="trait-box highlightable" data-tags="who">
+                            <i class="fa-solid fa-hand-holding-heart" style="color: var(--accent-rose);"></i>
+                            <span>Kind & Helpful</span>
+                        </div>
+                        <div class="trait-box highlightable" data-tags="who">
+                            <i class="fa-solid fa-hands-respecting" style="color: var(--accent-amber);"></i>
+                            <span>Respectful</span>
+                        </div>
+                        <div class="trait-box highlightable" data-tags="who">
+                            <i class="fa-solid fa-fire" style="color: var(--accent-blue);"></i>
+                            <span>Hardworking</span>
+                        </div>
+                        <div class="trait-box highlightable" data-tags="who">
+                            <i class="fa-solid fa-bolt" style="color: var(--accent-emerald);"></i>
+                            <span>Fast Learner</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: MY SKILLS -->
+        <div class="section-card highlightable" data-tags="skills">
+            <div class="section-header">
+                <i class="fa-solid fa-code" style="color: var(--accent-indigo);"></i>
+                <h2>2. My Skills</h2>
+            </div>
+
+            <div class="section-content-grid">
+                <!-- SVG Graphic Image Card 2 -->
+                <div class="visual-banner" style="background: linear-gradient(135deg, #091e3a 0%, #2f80ed 100%);">
+                    <svg viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="40" y="35" width="220" height="130" rx="10" fill="#0b0f17" stroke="#38bdf8" stroke-width="2"/>
+                        <circle cx="55" cy="50" r="4" fill="#f43f5e"/>
+                        <circle cx="67" cy="50" r="4" fill="#fbbf24"/>
+                        <circle cx="79" cy="50" r="4" fill="#34d399"/>
+                        <text x="55" y="75" fill="#818cf8" font-family="monospace" font-size="11" font-weight="bold">class Developer {</text>
+                        <text x="68" y="95" fill="#38bdf8" font-family="monospace" font-size="10">skills = ["C", "Java"];</text>
+                        <text x="68" y="115" fill="#34d399" font-family="monospace" font-size="10">learning = ["Python", "AI"];</text>
+                        <text x="55" y="135" fill="#818cf8" font-family="monospace" font-size="11" font-weight="bold">}</text>
+                        <rect x="180" y="123" width="8" height="14" fill="#38bdf8"/>
+                    </svg>
+                </div>
+
+                <!-- Skill Stack -->
+                <div>
+                    <div class="skill-group">
+                        <div class="skill-label">Programming Languages Mastered</div>
+                        <div class="skill-tags">
+                            <span class="tag highlightable" data-tags="skills"><i class="fa-solid fa-c"></i> C Language</span>
+                            <span class="tag highlightable" data-tags="skills"><i class="fa-brands fa-java"></i> Java</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-group">
+                        <div class="skill-label">Currently Learning & Expanding</div>
+                        <div class="skill-tags">
+                            <span class="tag active highlightable" data-tags="skills"><i class="fa-brands fa-python"></i> Python</span>
+                            <span class="tag active highlightable" data-tags="skills"><i class="fa-solid fa-robot"></i> AI & ML Concepts</span>
+                            <span class="tag active highlightable" data-tags="skills"><i class="fa-solid fa-diagram-project"></i> DSA</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-group" style="margin-bottom: 0;">
+                        <div class="skill-label">Core Competencies & Soft Skills</div>
+                        <div class="skill-tags">
+                            <span class="tag highlightable" data-tags="skills"><i class="fa-solid fa-lightbulb"></i> Idea Prototyping</span>
+                            <span class="tag highlightable" data-tags="skills"><i class="fa-solid fa-people-group"></i> Peer Support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: MY FUTURE GOALS -->
+        <div class="section-card highlightable" data-tags="goals">
+            <div class="section-header">
+                <i class="fa-solid fa-bullseye" style="color: var(--accent-emerald);"></i>
+                <h2>3. My Future Goals</h2>
+            </div>
+
+            <div class="section-content-grid">
+                <!-- SVG Graphic Image Card 3 -->
+                <div class="visual-banner" style="background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);">
+                    <svg viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="150" cy="100" r="60" fill="#34d399" fill-opacity="0.1" stroke="#34d399" stroke-width="2" stroke-dasharray="4 4"/>
+                        <circle cx="150" cy="100" r="40" stroke="#38bdf8" stroke-width="2"/>
+                        <circle cx="150" cy="100" r="20" fill="#34d399"/>
+                        <path d="M150 100L185 65M185 65H165M185 65V85" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <text x="150" y="180" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">Samsung AI Scholar • Innovator</text>
+                    </svg>
+                </div>
+
+                <!-- Goal Items -->
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div class="goal-item highlightable" data-tags="goals">
+                        <div class="goal-icon" style="background: rgba(129, 140, 248, 0.1); color: var(--accent-indigo);">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <div class="goal-content">
+                            <h3>Master AI & ML Ecosystems</h3>
+                            <p>Complete Samsung AI Course and master Python libraries (NumPy, Pandas, PyTorch).</p>
+                        </div>
+                    </div>
+
+                    <div class="goal-item highlightable" data-tags="goals">
+                        <div class="goal-icon" style="background: rgba(56, 189, 248, 0.1); color: var(--accent-blue);">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <div class="goal-content">
+                            <h3>Expand Tech Stack</h3>
+                            <p>Learn C++ for high performance, SQL for databases, and web frameworks for prototyping.</p>
+                        </div>
+                    </div>
+
+                    <div class="goal-item highlightable" data-tags="goals">
+                        <div class="goal-icon" style="background: rgba(52, 211, 153, 0.1); color: var(--accent-emerald);">
+                            <i class="fa-solid fa-hand-holding-hand"></i>
+                        </div>
+                        <div class="goal-content">
+                            <h3>Collaborate & Mentorship</h3>
+                            <p>Lead hackathon projects and support fellow classmates at IET Khandari.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: GET IN TOUCH -->
+        <div class="section-card">
+            <div class="section-header">
+                <i class="fa-solid fa-paper-plane" style="color: var(--accent-rose);"></i>
+                <h2>4. Connect With Me</h2>
+            </div>
+            <div class="contact-grid">
+                <a href="mailto:anshika@example.com" class="contact-card">
+                    <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <div class="contact-info">
+                        <h4>Email</h4>
+                        <p>Send a Message</p>
+                    </div>
+                </a>
+                <a href="https://github.com" target="_blank" class="contact-card">
+                    <div class="contact-icon"><i class="fa-brands fa-github"></i></div>
+                    <div class="contact-info">
+                        <h4>GitHub</h4>
+                        <p>Explore Repos</p>
+                    </div>
+                </a>
+                <a href="https://linkedin.com" target="_blank" class="contact-card">
+                    <div class="contact-icon"><i class="fa-brands fa-linkedin"></i></div>
+                    <div class="contact-info">
+                        <h4>LinkedIn</h4>
+                        <p>Let's Connect</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            &copy; 2026 Anshika Pandey • B.Tech CSE 2nd Year, IET Khandari
+        </footer>
+    </div>
+
+    <script>
+        // Interactive Filter Script
+        function applyHighlight(category, btnElement) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
+
+            const elements = document.querySelectorAll('.highlightable');
+
+            elements.forEach(el => {
+                const tags = el.getAttribute('data-tags') || '';
+                
+                if (category === 'all') {
+                    el.classList.remove('is-highlighted', 'is-dimmed');
+                } else {
+                    if (tags.includes(category)) {
+                        el.classList.add('is-highlighted');
+                        el.classList.remove('is-dimmed');
+                    } else {
+                        el.classList.remove('is-highlighted');
+                        el.classList.add('is-dimmed');
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
